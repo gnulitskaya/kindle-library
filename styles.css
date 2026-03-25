@@ -295,3 +295,134 @@
 	font-size: 0.8rem;
 	resize: vertical;
 }
+
+/* ── Library View ─────────────────────────────────────────── */
+
+.kindle-library-view {
+	padding: 20px 24px;
+	overflow-y: auto;
+	height: 100%;
+	box-sizing: border-box;
+}
+
+.kindle-library-view-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+
+.kindle-library-view-header h2 {
+	margin: 0;
+	font-size: 1.2rem;
+}
+
+.kindle-library-view-actions {
+	display: flex;
+	gap: 8px;
+}
+
+.kindle-library-view-import-btn {
+	font-size: 0.85rem;
+	padding: 5px 14px;
+	border-radius: var(--radius-s);
+	cursor: pointer;
+}
+
+/* Grid */
+.kindle-library-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+	gap: 16px;
+}
+
+/* Card */
+.kindle-library-card {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	cursor: pointer;
+	border-radius: var(--radius-m);
+	padding: 6px;
+	transition: background 0.12s;
+}
+
+.kindle-library-card:hover {
+	background: var(--background-secondary);
+}
+
+.kindle-library-card-cover-wrap {
+	width: 100%;
+	aspect-ratio: 2 / 3;
+	border-radius: 4px;
+	overflow: hidden;
+	background: var(--background-secondary);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+}
+
+.kindle-library-card-cover {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+.kindle-library-card-placeholder-svg {
+	width: 60%;
+	height: 60%;
+	color: var(--text-faint);
+}
+
+.kindle-library-card-info {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.kindle-library-card-title {
+	margin: 0;
+	font-size: 0.8rem;
+	font-weight: 600;
+	line-height: 1.3;
+	color: var(--text-normal);
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.kindle-library-card-author {
+	margin: 0;
+	font-size: 0.75rem;
+	color: var(--text-muted);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+/* Empty state */
+.kindle-library-view-empty {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	gap: 16px;
+	padding: 60px 24px;
+	color: var(--text-muted);
+}
+
+.kindle-library-view-empty-icon svg {
+	width: 80px;
+	height: 80px;
+	color: var(--text-faint);
+}
+
+.kindle-library-view-empty p {
+	margin: 0;
+	font-size: 0.9rem;
+	max-width: 280px;
+}

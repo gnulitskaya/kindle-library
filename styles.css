@@ -11,18 +11,17 @@
 	flex-direction: column;
 	align-items: center;
 	text-align: center;
-	padding: 24px 0 20px;
+	padding: 28px 0 22px;
 }
 
-.kindle-library-hero svg {
-	width: 72px;
-	height: 72px;
-	color: var(--interactive-accent);
+.kindle-library-hero-emoji {
+	font-size: 3rem;
+	line-height: 1;
 	margin-bottom: 14px;
 }
 
 .kindle-library-hero h2 {
-	margin: 0 0 4px;
+	margin: 0 0 6px;
 	font-size: 1.25rem;
 }
 
@@ -37,8 +36,8 @@
 	display: flex;
 	align-items: center;
 	gap: 12px;
-	padding: 16px 20px;
-	margin: 20px 0;
+	padding: 18px 22px;
+	margin: 0 0 16px;
 	border: 2px dashed var(--background-modifier-border);
 	border-radius: var(--radius-m);
 	cursor: pointer;
@@ -66,15 +65,10 @@
 	75% { transform: translateX(4px); }
 }
 
-.kindle-library-dropzone-icon svg {
-	width: 28px;
-	height: 28px;
-	color: var(--text-muted);
+.kindle-library-dropzone-icon {
+	font-size: 1.4rem;
+	line-height: 1;
 	flex-shrink: 0;
-}
-
-.kindle-library-dropzone.is-selected .kindle-library-dropzone-icon svg {
-	color: var(--interactive-accent);
 }
 
 .kindle-library-dropzone-label {
@@ -100,25 +94,37 @@
 	display: none;
 }
 
-/* Status */
+/* Status — видим только во время импорта */
 .kindle-library-status {
-	margin-top: 8px;
+	margin-bottom: 12px;
 	padding: 10px 14px;
 	border-radius: var(--radius-m);
 	background: var(--background-secondary);
-	min-height: 42px;
 }
 
 .kindle-library-status-msg {
 	margin: 0;
-	color: var(--text-normal);
-	font-size: 0.9rem;
+	color: var(--text-muted);
+	font-size: 0.875rem;
 }
 
 .kindle-library-status-error {
 	margin: 4px 0 0;
 	color: var(--text-error);
 	font-size: 0.875rem;
+}
+
+/* Import footer */
+.kindle-library-import-footer {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.kindle-library-import-btn {
+	padding: 8px 22px;
+	border-radius: var(--radius-m);
+	font-size: 0.9rem;
+	cursor: pointer;
 }
 
 /* Complete state */
@@ -135,6 +141,7 @@
 	padding: 24px 16px 16px;
 	border-radius: var(--radius-m);
 	background: var(--background-secondary);
+	margin-bottom: 12px;
 }
 
 .kindle-library-complete-emoji {
@@ -277,9 +284,14 @@
 	margin: 0;
 }
 
-.kindle-library-candidate-item .setting-item {
-	border: none;
-	padding: 6px 0 0;
+.kindle-library-select-btn {
+	flex-shrink: 0;
+	align-self: center;
+	padding: 6px 14px;
+	border-radius: var(--radius-s);
+	font-size: 0.875rem;
+	cursor: pointer;
+	white-space: nowrap;
 }
 
 .kindle-library-modal-actions .setting-item {

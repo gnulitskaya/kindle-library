@@ -1,4 +1,5 @@
 import { App, ItemView, TFile, WorkspaceLeaf } from 'obsidian';
+import { t } from '../i18n';
 import { KindleLibrarySettings } from '../settings';
 import { ImportModal } from './import-modal';
 
@@ -27,7 +28,7 @@ export class LibraryView extends ItemView {
 	}
 
 	getDisplayText(): string {
-		return 'Kindle Library';
+		return t().libraryView.displayText;
 	}
 
 	getIcon(): string {
@@ -66,13 +67,14 @@ export class LibraryView extends ItemView {
 	}
 
 	private renderHeader(containerEl: HTMLElement): void {
+		const i18n = t().libraryView;
 		const header = containerEl.createDiv('kindle-library-view-header');
-		header.createEl('h2', { text: 'Kindle Library' });
+		header.createEl('h2', { text: i18n.heading });
 
 		const actions = header.createDiv('kindle-library-view-actions');
 
 		const importBtn = actions.createEl('button', {
-			text: 'Import',
+			text: i18n.importBtn,
 			cls: 'mod-cta kindle-library-view-import-btn',
 		});
 		importBtn.addEventListener('click', () => {
@@ -81,11 +83,12 @@ export class LibraryView extends ItemView {
 	}
 
 	private renderEmpty(containerEl: HTMLElement): void {
+		const i18n = t().libraryView;
 		const empty = containerEl.createDiv('kindle-library-view-empty');
 		empty.createDiv('kindle-library-view-empty-icon').innerHTML = EMPTY_SVG;
-		empty.createEl('p', { text: 'No books yet. Import your Kindle clippings to get started.' });
+		empty.createEl('p', { text: i18n.emptyText });
 		const btn = empty.createEl('button', {
-			text: 'Import clippings',
+			text: i18n.importClippingsBtn,
 			cls: 'mod-cta',
 		});
 		btn.addEventListener('click', () => {

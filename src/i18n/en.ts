@@ -1,0 +1,76 @@
+export const en = {
+	importModal: {
+		title: 'Import Kindle clippings',
+		subtitle: 'Bring your highlights and notes into Obsidian',
+		clickToSelect: 'Click to select ',
+		importBtn: 'Import →',
+		noFileSelected: 'Please select a My Clippings.txt file first.',
+		noHighlights: 'No highlights found in the selected file.',
+		foundBooks: (n: number) => `Found ${n} book(s). Starting import...`,
+		processing: (i: number, total: number, title: string) =>
+			`Processing ${i} / ${total}: "${title}"...`,
+		failedNote: (title: string, err: string) =>
+			`Failed to create note for "${title}": ${err}`,
+		cancelled: (created: number) =>
+			`Import cancelled. Created ${created} note(s) before cancellation.`,
+		completeEmoji: '🎉',
+		completeTitle: 'Import complete!',
+		completeDetail: (created: number, skipped: number) =>
+			skipped > 0
+				? `Created ${created} note${created !== 1 ? 's' : ''}, skipped ${skipped}`
+				: `Created ${created} note${created !== 1 ? 's' : ''}`,
+		openFolder: (path: string) => `Open "${path}"`,
+		completeNotice: (detail: string) => `🎉 Import complete! ${detail}`,
+	},
+	confirmModal: {
+		title: 'Match book to Google Books',
+		parsedTitle: (title: string) => `Parsed title: ${title}`,
+		parsedAuthor: (author: string) => `Parsed author: ${author}`,
+		highlights: (n: number) => `Highlights: ${n}`,
+		searchPlaceholder: 'Search Google Books...',
+		searchBtn: 'Search',
+		resultsTitle: 'Results:',
+		searching: 'Searching...',
+		searchFailed: 'Google Books search failed. Check your internet connection.',
+		noResults: 'No results found. Try a different query above.',
+		selectBestMatch: 'Select (best match)',
+		select: 'Select',
+		addAsIs: 'Add as-is',
+		cancelImport: 'Cancel import',
+	},
+	libraryView: {
+		displayText: 'Kindle Library',
+		heading: 'Kindle Library',
+		importBtn: 'Import',
+		emptyText: 'No books yet. Import your Kindle clippings to get started.',
+		importClippingsBtn: 'Import clippings',
+	},
+	settings: {
+		heading: 'Kindle Library',
+		highlightsFolder: {
+			name: 'Highlights folder',
+			desc: 'Vault folder where book notes will be created.',
+			placeholder: 'Kindle',
+		},
+		googleApiKey: {
+			name: 'Google Books API key',
+			desc: 'Optional. Provide an API key to avoid rate limits when fetching book metadata from Google Books.',
+			placeholder: 'AIza...',
+		},
+		fileNameTemplate: {
+			name: 'File name template',
+			desc: 'Template for note file names. Available variables: {{title}}, {{author}}.',
+			placeholder: '{{title}} - {{author}}',
+		},
+		noteTemplate: {
+			name: 'Note template',
+			desc: 'Handlebars-style template for book notes. Available variables: {{title}}, {{author}}, {{coverUrl}}, {{publisher}}, {{publishedDate}}, {{isbn}}, {{description}}, {{highlights}}.',
+		},
+		resetTemplate: 'Reset template to default',
+	},
+	commands: {
+		openLibrary: 'Open Kindle Library',
+		importClippings: 'Import Kindle clippings',
+		ribbonTooltip: 'Kindle Library',
+	},
+};

@@ -1,4 +1,5 @@
 import { App, Modal, Notice, Setting } from 'obsidian';
+import { t } from '../i18n';
 import { GoogleBooksService } from '../services/google-books.service';
 import { GoogleBookVolume, ParsedBook } from '../types';
 
@@ -43,27 +44,29 @@ export class BookConfirmModal extends Modal {
 		contentEl.empty();
 		contentEl.addClass('kindle-library-confirm-modal');
 
-		contentEl.createEl('h2', { text: 'Match book to Google Books' });
+		const i18n = t().confirmModal;
+
+		contentEl.createEl('h2', { text: i18n.title });
 
 		// Parsed book info
 		const infoEl = contentEl.createDiv('kindle-library-parsed-info');
-		infoEl.createEl('p', { text: `Parsed title: ${this.parsedBook.rawTitle}` });
-		infoEl.createEl('p', { text: `Parsed author: ${this.parsedBook.rawAuthor}` });
-		infoEl.createEl('p', { text: `Highlights: ${this.parsedBook.highlights.length}` });
+		infoEl.createEl('p', { text: i18n.parsedTitle(this.parsedBook.rawTitle) });
+		infoEl.createEl('p', { text: i18n.parsedAuthor(this.parsedBook.rawAuthor) });
+		infoEl.createEl('p', { text: i18n.highlights(this.parsedBook.highlights.length) });
 
 		// Search bar
 		const searchBar = contentEl.createDiv('kindle-library-search-bar');
 		this.searchInput = searchBar.createEl('input', {
 			type: 'text',
 			cls: 'kindle-library-search-input',
-			placeholder: 'Search Google Books...',
+			placeholder: i18n.searchPlaceholder,
 		});
 		this.searchInput.value = [this.parsedBook.rawTitle, this.parsedBook.rawAuthor]
 			.filter(Boolean)
 			.join(' ');
 
 		const searchBtn = searchBar.createEl('button', {
-			text: 'Search',
+			text: i18n.searchBtn,
 			cls: 'kindle-library-search-btn mod-cta',
 		});
 		searchBtn.addEventListener('click', () => this.doSearch());
@@ -73,7 +76,7 @@ export class BookConfirmModal extends Modal {
 		});
 
 		// Results container
-		contentEl.createEl('h3', { text: 'Results:' });
+		contentEl.createEl('h3', { text: i18n.resultsTitle });
 		this.resultsEl = contentEl.createDiv('kindle-library-candidates-list');
 
 		// Actions container (updated after each search)
@@ -87,19 +90,18 @@ export class BookConfirmModal extends Modal {
 		const query = this.searchInput.value.trim();
 		if (!query) return;
 
+		const i18n = t().confirmModal;
+
 		this.resultsEl.empty();
 		this.actionsEl.empty();
-		this.resultsEl.createEl('p', {
-			text: 'Searching...',
-			cls: 'kindle-library-status-msg',
-		});
+		this.resultsEl.createEl('p', { text: i18n.searching, cls: 'kindle-library-status-msg' });
 
 		let candidates: GoogleBookVolume[] = [];
 
 		try {
 			candidates = await this.googleBooks.searchByQuery(query);
 		} catch (err) {
-			new Notice('Google Books search failed. Check your internet connection.');
+			new Notice(i18n.searchFailed);
 			console.error('Google Books search error:', err);
 		}
 
@@ -110,11 +112,10 @@ export class BookConfirmModal extends Modal {
 		this.resultsEl.empty();
 		this.actionsEl.empty();
 
+		const i18n = t().confirmModal;
+
 		if (candidates.length === 0) {
-			this.resultsEl.createEl('p', {
-				text: 'No results found. Try a different query above.',
-				cls: 'kindle-library-no-results',
-			});
+			this.resultsEl.createEl('p', { text: i18n.noResults, cls: 'kindle-library-no-results' });
 			this.renderActionButtons(null);
 			return;
 		}
@@ -133,10 +134,7 @@ export class BookConfirmModal extends Modal {
 			const meta = item.createDiv('kindle-library-candidate-meta');
 			meta.createEl('strong', { text: volume.title });
 			if (volume.subtitle) {
-				meta.createEl('span', {
-					text: ` — ${volume.subtitle}`,
-					cls: 'kindle-library-subtitle',
-				});
+				meta.createEl('span', { text: ` — ${volume.subtitle}`, cls: 'kindle-library-subtitle' });
 			}
 			meta.createEl('p', { text: volume.authors.join(', '), cls: 'kindle-library-authors' });
 			if (volume.publisher) {
@@ -146,16 +144,15 @@ export class BookConfirmModal extends Modal {
 				});
 			}
 
-			new Setting(item).addButton(btn =>
-				btn
-					.setButtonText(index === 0 ? 'Select (best match)' : 'Select')
-					.setCta()
-					.onClick(() => {
-						this.result = { action: 'confirm', book: volume };
-						this.onResolve(this.result);
-						this.close();
-					})
-			);
+			const selectBtn = item.createEl('button', {
+				text: index === 0 ? i18n.selectBestMatch : i18n.select,
+				cls: 'kindle-library-select-btn mod-cta',
+			});
+			selectBtn.addEventListener('click', () => {
+				this.result = { action: 'confirm', book: volume };
+				this.onResolve(this.result);
+				this.close();
+			});
 		});
 
 		this.renderActionButtons(candidates[0] ?? null);
@@ -164,20 +161,12 @@ export class BookConfirmModal extends Modal {
 	private renderActionButtons(bestMatch: GoogleBookVolume | null): void {
 		this.actionsEl.empty();
 
+		const i18n = t().confirmModal;
+
 		if (bestMatch) {
 			new Setting(this.actionsEl)
 				.addButton(btn =>
-					btn
-						.setButtonText('Use best match')
-						.setCta()
-						.onClick(() => {
-							this.result = { action: 'confirm', book: bestMatch };
-							this.onResolve(this.result);
-							this.close();
-						})
-				)
-				.addButton(btn =>
-					btn.setButtonText('Skip this book').onClick(() => {
+					btn.setButtonText(i18n.addAsIs).onClick(() => {
 						this.result = { action: 'skip' };
 						this.onResolve(this.result);
 						this.close();
@@ -185,7 +174,7 @@ export class BookConfirmModal extends Modal {
 				)
 				.addButton(btn =>
 					btn
-						.setButtonText('Cancel import')
+						.setButtonText(i18n.cancelImport)
 						.setWarning()
 						.onClick(() => {
 							this.result = { action: 'cancel' };
@@ -197,7 +186,7 @@ export class BookConfirmModal extends Modal {
 			new Setting(this.actionsEl)
 				.addButton(btn =>
 					btn
-						.setButtonText('Create note without metadata')
+						.setButtonText(i18n.addAsIs)
 						.setCta()
 						.onClick(() => {
 							this.result = { action: 'skip' };
@@ -207,7 +196,7 @@ export class BookConfirmModal extends Modal {
 				)
 				.addButton(btn =>
 					btn
-						.setButtonText('Cancel import')
+						.setButtonText(i18n.cancelImport)
 						.setWarning()
 						.onClick(() => {
 							this.result = { action: 'cancel' };

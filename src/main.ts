@@ -1,4 +1,5 @@
 import { Plugin, WorkspaceLeaf } from 'obsidian';
+import { t } from './i18n';
 import { DEFAULT_SETTINGS, KindleLibrarySettings, KindleLibrarySettingTab } from './settings';
 import { ImportModal } from './ui/import-modal';
 import { LibraryView, VIEW_TYPE_LIBRARY } from './ui/library-view';
@@ -16,19 +17,19 @@ export default class KindleLibraryPlugin extends Plugin {
 
 		this.addCommand({
 			id: 'open-kindle-library',
-			name: 'Open Kindle Library',
+			name: t().commands.openLibrary,
 			callback: () => this.openLibraryView(),
 		});
 
 		this.addCommand({
 			id: 'import-kindle-clippings',
-			name: 'Import Kindle clippings',
+			name: t().commands.importClippings,
 			callback: () => {
 				new ImportModal(this.app, this.settings).open();
 			},
 		});
 
-		this.addRibbonIcon('book-open', 'Kindle Library', () => this.openLibraryView());
+		this.addRibbonIcon('book-open', t().commands.ribbonTooltip, () => this.openLibraryView());
 
 		this.addSettingTab(new KindleLibrarySettingTab(this.app, this));
 	}

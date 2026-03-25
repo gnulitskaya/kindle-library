@@ -1,4 +1,5 @@
 import { App, PluginSettingTab, Setting } from 'obsidian';
+import { t } from './i18n';
 import KindleLibraryPlugin from './main';
 
 export interface KindleLibrarySettings {
@@ -59,14 +60,16 @@ export class KindleLibrarySettingTab extends PluginSettingTab {
 		const { containerEl } = this;
 		containerEl.empty();
 
-		containerEl.createEl('h2', { text: 'Kindle Library' });
+		const i18n = t().settings;
+
+		containerEl.createEl('h2', { text: i18n.heading });
 
 		new Setting(containerEl)
-			.setName('Highlights folder')
-			.setDesc('Vault folder where book notes will be created.')
+			.setName(i18n.highlightsFolder.name)
+			.setDesc(i18n.highlightsFolder.desc)
 			.addText(text =>
 				text
-					.setPlaceholder('Kindle')
+					.setPlaceholder(i18n.highlightsFolder.placeholder)
 					.setValue(this.plugin.settings.highlightsFolder)
 					.onChange(async value => {
 						this.plugin.settings.highlightsFolder = value.trim() || 'Kindle';
@@ -75,13 +78,11 @@ export class KindleLibrarySettingTab extends PluginSettingTab {
 			);
 
 		new Setting(containerEl)
-			.setName('Google Books API key')
-			.setDesc(
-				'Optional. Provide an API key to avoid rate limits when fetching book metadata from Google Books.'
-			)
+			.setName(i18n.googleApiKey.name)
+			.setDesc(i18n.googleApiKey.desc)
 			.addText(text =>
 				text
-					.setPlaceholder('AIza...')
+					.setPlaceholder(i18n.googleApiKey.placeholder)
 					.setValue(this.plugin.settings.googleApiKey)
 					.onChange(async value => {
 						this.plugin.settings.googleApiKey = value.trim();
@@ -90,13 +91,11 @@ export class KindleLibrarySettingTab extends PluginSettingTab {
 			);
 
 		new Setting(containerEl)
-			.setName('File name template')
-			.setDesc(
-				'Template for note file names. Available variables: {{title}}, {{author}}.'
-			)
+			.setName(i18n.fileNameTemplate.name)
+			.setDesc(i18n.fileNameTemplate.desc)
 			.addText(text =>
 				text
-					.setPlaceholder('{{title}} - {{author}}')
+					.setPlaceholder(i18n.fileNameTemplate.placeholder)
 					.setValue(this.plugin.settings.fileNameTemplate)
 					.onChange(async value => {
 						this.plugin.settings.fileNameTemplate =
@@ -106,10 +105,8 @@ export class KindleLibrarySettingTab extends PluginSettingTab {
 			);
 
 		new Setting(containerEl)
-			.setName('Note template')
-			.setDesc(
-				'Handlebars-style template for book notes. Available variables: {{title}}, {{author}}, {{coverUrl}}, {{publisher}}, {{publishedDate}}, {{isbn}}, {{description}}, {{highlights}}.'
-			)
+			.setName(i18n.noteTemplate.name)
+			.setDesc(i18n.noteTemplate.desc)
 			.addTextArea(text => {
 				text
 					.setPlaceholder(DEFAULT_NOTE_TEMPLATE)
@@ -124,7 +121,7 @@ export class KindleLibrarySettingTab extends PluginSettingTab {
 
 		new Setting(containerEl).addButton(btn =>
 			btn
-				.setButtonText('Reset template to default')
+				.setButtonText(i18n.resetTemplate)
 				.onClick(async () => {
 					this.plugin.settings.noteTemplate = DEFAULT_NOTE_TEMPLATE;
 					await this.plugin.saveSettings();

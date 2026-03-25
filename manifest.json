@@ -1,11 +1,9 @@
 {
-	"id": "sample-plugin",
-	"name": "Sample Plugin",
+	"id": "kindle-library",
+	"name": "Kindle Library",
 	"version": "1.0.0",
 	"minAppVersion": "0.15.0",
-	"description": "Demonstrates some of the capabilities of the Obsidian API.",
-	"author": "Obsidian",
-	"authorUrl": "https://obsidian.md",
-	"fundingUrl": "https://obsidian.md/pricing",
-	"isDesktopOnly": false
+	"description": "Import Kindle highlights from My Clippings.txt and enrich book notes with Google Books metadata.",
+	"author": "Valeria Gnulitskaya",
+	"isDesktopOnly": true
 }

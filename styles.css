@@ -1,8 +1,154 @@
-/*
+/* ── Import Modal ─────────────────────────────────────────── */
 
-This CSS file will be included with your plugin, and
-available in the app when your plugin is enabled.
+.kindle-library-import-modal .modal-content {
+	max-width: 560px;
+}
 
-If your plugin does not need CSS, delete this file.
+.kindle-library-description {
+	color: var(--text-muted);
+	margin-bottom: 16px;
+}
 
-*/
+.kindle-library-file-input-wrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	margin-bottom: 16px;
+}
+
+.kindle-library-file-input {
+	cursor: pointer;
+}
+
+.kindle-library-file-label {
+	font-size: 0.875rem;
+	color: var(--text-muted);
+	margin: 0;
+}
+
+.kindle-library-status {
+	margin-top: 16px;
+	padding: 10px 14px;
+	border-radius: var(--radius-m);
+	background: var(--background-secondary);
+	min-height: 42px;
+}
+
+.kindle-library-status-msg {
+	margin: 0;
+	color: var(--text-normal);
+	font-size: 0.9rem;
+}
+
+.kindle-library-status-error {
+	margin: 4px 0 0;
+	color: var(--text-error);
+	font-size: 0.875rem;
+}
+
+/* ── Book Confirm Modal ───────────────────────────────────── */
+
+.kindle-library-confirm-modal .modal-content {
+	max-width: 640px;
+	max-height: 80vh;
+	overflow-y: auto;
+}
+
+.kindle-library-parsed-info {
+	padding: 10px 14px;
+	border-radius: var(--radius-m);
+	background: var(--background-secondary);
+	margin-bottom: 16px;
+}
+
+.kindle-library-parsed-info p {
+	margin: 2px 0;
+	font-size: 0.875rem;
+	color: var(--text-muted);
+}
+
+.kindle-library-no-results {
+	color: var(--text-muted);
+	font-style: italic;
+}
+
+.kindle-library-candidates-list {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	margin-bottom: 16px;
+}
+
+.kindle-library-candidate-item {
+	display: flex;
+	align-items: flex-start;
+	gap: 14px;
+	padding: 12px;
+	border-radius: var(--radius-m);
+	border: 1px solid var(--background-modifier-border);
+	background: var(--background-primary);
+}
+
+.kindle-library-candidate-cover {
+	width: 64px;
+	height: 92px;
+	object-fit: cover;
+	border-radius: 3px;
+	flex-shrink: 0;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.kindle-library-candidate-cover-placeholder {
+	width: 64px;
+	height: 92px;
+	border-radius: 3px;
+	background: var(--background-modifier-border);
+	flex-shrink: 0;
+}
+
+.kindle-library-candidate-meta {
+	flex: 1;
+	min-width: 0;
+}
+
+.kindle-library-candidate-meta strong {
+	font-size: 0.95rem;
+	display: block;
+	margin-bottom: 2px;
+}
+
+.kindle-library-subtitle {
+	font-size: 0.875rem;
+	color: var(--text-muted);
+}
+
+.kindle-library-authors {
+	font-size: 0.875rem;
+	color: var(--text-muted);
+	margin: 4px 0 2px;
+}
+
+.kindle-library-publisher {
+	font-size: 0.8rem;
+	color: var(--text-faint);
+	margin: 0;
+}
+
+.kindle-library-candidate-item .setting-item {
+	border: none;
+	padding: 6px 0 0;
+}
+
+.kindle-library-modal-actions .setting-item {
+	border: none;
+	padding-top: 8px;
+}
+
+/* ── Settings ─────────────────────────────────────────────── */
+
+.kindle-library-template-textarea {
+	width: 100%;
+	font-family: var(--font-monospace);
+	font-size: 0.8rem;
+	resize: vertical;
+}

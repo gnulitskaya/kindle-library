@@ -33,8 +33,14 @@ export class GoogleBooksService {
 	constructor(private readonly apiKey?: string) {}
 
 	async searchBooks(title: string, author: string): Promise<GoogleBookVolume[]> {
-		const query = buildQuery(title, author);
-		const url = buildUrl(query, this.apiKey);
+		const query = [title, author].filter(Boolean).join(' ').trim();
+		return this.searchByQuery(query);
+	}
+
+	async searchByQuery(query: string): Promise<GoogleBookVolume[]> {
+		if (!query.trim()) return [];
+
+		const url = buildUrl(query.trim(), this.apiKey);
 
 		const response = await fetch(url);
 		if (!response.ok) {
@@ -48,25 +54,9 @@ export class GoogleBooksService {
 	}
 }
 
-function buildQuery(title: string, author: string): string {
-	const parts: string[] = [];
-	if (title) parts.push(`intitle:${title}`);
-	if (author) parts.push(`inauthor:${author}`);
-	return parts.join('+');
-}
-
 function buildUrl(query: string, apiKey?: string): string {
-	const params = new URLSearchParams({
-		q: query,
-		maxResults: '5',
-		langRestrict: '',
-	});
-
+	const params = new URLSearchParams({ q: query, maxResults: '5' });
 	if (apiKey) params.set('key', apiKey);
-
-	// Remove empty params
-	params.delete('langRestrict');
-
 	return `${BASE_URL}?${params.toString()}`;
 }
 

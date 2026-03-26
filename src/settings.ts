@@ -1,4 +1,4 @@
-import { App, PluginSettingTab, Setting } from 'obsidian';
+import { App, PluginSettingTab, Setting, moment } from 'obsidian';
 import { t } from './i18n';
 import KindleLibraryPlugin from './main';
 
@@ -9,7 +9,7 @@ export interface KindleLibrarySettings {
 	noteTemplate: string;
 }
 
-export const DEFAULT_NOTE_TEMPLATE = `---
+const DEFAULT_NOTE_TEMPLATE_RU = `---
 title: "{{title}}"
 author: "{{author}}"
 cover: "{{coverUrl}}"
@@ -52,11 +52,59 @@ tags: [book, kindle]
 
 {{/each}}`;
 
+const DEFAULT_NOTE_TEMPLATE_EN = `---
+title: "{{title}}"
+author: "{{author}}"
+cover: "{{coverUrl}}"
+publisher: "{{publisher}}"
+published: "{{publishedDate}}"
+isbn: "{{isbn}}"
+status: "read"
+tags: [book, kindle]
+---
+
+{{#if coverUrl}}
+![cover|200]({{coverUrl}})
+{{/if}}
+
+# {{title}}
+*{{author}}*
+
+{{#if description}}
+{{description}}
+{{/if}}
+
+---
+
+## Questions to work with the book
+
+1. Why did I choose this book? What did I want to learn?
+2. What is the main idea of the book?
+3. What surprised me or changed my mind?
+4. What do I want to apply from what I read?
+5. Three key insights I want to remember.
+
+---
+
+## Highlights
+
+{{#each highlights}}
+> {{text}}
+
+<span class="kindle-library-highlight-meta">— {{#if page}}page {{page}}, {{/if}}location {{locationStart}}–{{locationEnd}} · {{addedAt}}</span>
+
+{{/each}}`;
+
+export function getDefaultNoteTemplate(): string {
+	const lang = moment.locale().slice(0, 2);
+	return lang === 'ru' ? DEFAULT_NOTE_TEMPLATE_RU : DEFAULT_NOTE_TEMPLATE_EN;
+}
+
 export const DEFAULT_SETTINGS: KindleLibrarySettings = {
 	highlightsFolder: 'Kindle',
 	googleApiKey: '',
 	fileNameTemplate: '{{title}} - {{author}}',
-	noteTemplate: DEFAULT_NOTE_TEMPLATE,
+	noteTemplate: getDefaultNoteTemplate(),
 };
 
 export class KindleLibrarySettingTab extends PluginSettingTab {
@@ -119,11 +167,12 @@ export class KindleLibrarySettingTab extends PluginSettingTab {
 			.setName(i18n.noteTemplate.name)
 			.setDesc(i18n.noteTemplate.desc)
 			.addTextArea(text => {
+				const defaultTemplate = getDefaultNoteTemplate();
 				text
-					.setPlaceholder(DEFAULT_NOTE_TEMPLATE)
+					.setPlaceholder(defaultTemplate)
 					.setValue(this.plugin.settings.noteTemplate)
 					.onChange(async value => {
-						this.plugin.settings.noteTemplate = value || DEFAULT_NOTE_TEMPLATE;
+						this.plugin.settings.noteTemplate = value || defaultTemplate;
 						await this.plugin.saveSettings();
 					});
 				text.inputEl.rows = 20;
@@ -134,7 +183,7 @@ export class KindleLibrarySettingTab extends PluginSettingTab {
 			btn
 				.setButtonText(i18n.resetTemplate)
 				.onClick(async () => {
-					this.plugin.settings.noteTemplate = DEFAULT_NOTE_TEMPLATE;
+					this.plugin.settings.noteTemplate = getDefaultNoteTemplate();
 					await this.plugin.saveSettings();
 					this.display();
 				})

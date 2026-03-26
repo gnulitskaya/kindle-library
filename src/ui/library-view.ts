@@ -2,6 +2,7 @@ import { App, ItemView, TFile, WorkspaceLeaf } from 'obsidian';
 import { t } from '../i18n';
 import { KindleLibrarySettings } from '../settings';
 import { ImportModal } from './import-modal';
+import { ManualAddModal } from './manual-add-modal';
 
 export const VIEW_TYPE_LIBRARY = 'kindle-library-view';
 
@@ -86,6 +87,14 @@ export class LibraryView extends ItemView {
 		// }
 
 		const actions = header.createDiv('kindle-library-view-actions');
+		const manualBtn = actions.createEl('button', {
+			text: i18n.addManualBtn,
+			cls: 'kindle-library-view-manual-btn',
+		});
+		manualBtn.addEventListener('click', () => {
+			new ManualAddModal(this.pluginApp, this.settings).open();
+		});
+
 		const importBtn = actions.createEl('button', {
 			text: i18n.importBtn,
 			cls: 'mod-cta kindle-library-view-import-btn',
@@ -115,6 +124,8 @@ export class LibraryView extends ItemView {
 		for (const book of books) {
 			this.renderCard(grid, book);
 		}
+
+		this.renderAddCard(grid);
 	}
 
 	private renderCard(gridEl: HTMLElement, book: BookCard): void {
@@ -144,6 +155,16 @@ export class LibraryView extends ItemView {
 		const info = card.createDiv('kindle-library-card-info');
 		info.createEl('p', { text: book.title, cls: 'kindle-library-card-title' });
 		info.createEl('p', { text: book.author, cls: 'kindle-library-card-author' });
+	}
+
+	private renderAddCard(gridEl: HTMLElement): void {
+		const i18n = t().libraryView;
+		const card = gridEl.createDiv('kindle-library-add-card');
+		card.setAttribute('aria-label', i18n.addManualBtn);
+		card.createDiv('kindle-library-add-card-plus').setText('+');
+		card.addEventListener('click', () => {
+			new ManualAddModal(this.pluginApp, this.settings).open();
+		});
 	}
 
 	private loadBooks(): BookCard[] {

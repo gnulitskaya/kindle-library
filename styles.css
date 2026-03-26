@@ -5,8 +5,8 @@
 	overflow-y: auto;
 }
 
-.markdown-rendered .kindle-library-highlight-meta {
-	font-size: 0.8em;
+.kindle-library-highlight-meta {
+	font-size: 0.7rem;
 	color: var(--text-muted);
 }
 
@@ -343,6 +343,13 @@
 	gap: 8px;
 }
 
+.kindle-library-view-manual-btn {
+	font-size: 0.85rem;
+	padding: 5px 14px;
+	border-radius: var(--radius-s);
+	cursor: pointer;
+}
+
 .kindle-library-view-stats {
 	font-size: 0.8rem;
 	color: var(--text-muted);
@@ -436,6 +443,28 @@
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+}
+
+.kindle-library-add-card {
+	border: 1px dashed var(--background-modifier-border);
+	border-radius: var(--radius-m);
+	aspect-ratio: 2 / 3;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	transition: border-color 0.12s, background 0.12s;
+}
+
+.kindle-library-add-card:hover {
+	border-color: var(--interactive-accent);
+	background: var(--background-secondary);
+}
+
+.kindle-library-add-card-plus {
+	font-size: 2.1rem;
+	line-height: 1;
+	color: var(--text-muted);
 }
 
 /* Empty state */

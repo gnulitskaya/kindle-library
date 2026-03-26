@@ -35,11 +35,21 @@ tags: [book, kindle]
 
 ## Вопросы для работы с книгой
 
-1. Почему я выбрал эту книгу? Что хотел узнать?
-2. Какова главная идея книги?
-3. Что удивило меня или поменяло моё мнение?
-4. Что я хочу применить из прочитанного?
-5. Три ключевые мысли, которые стоит запомнить.
+### 🚀 The Book in 3 Sentences
+Три фразы - и ты сразу вспоминаешь суть книги.
+> [ваш ответ тут]
+
+### ☘️ How the Book Changed Me
+Что изменилось в мыслях или поведении.
+> [ваш ответ тут]
+
+### ✍️ Top 3 Quotes
+Цитаты, к которым хочется возвращаться.
+> [ваш ответ тут]
+
+### 📒 Summary + Notes
+Полезные заметки и идеи для пересмотра.
+> [ваш ответ тут]
 
 ---
 
@@ -47,8 +57,7 @@ tags: [book, kindle]
 
 {{#each highlights}}
 > {{text}}
-
-<span class="kindle-library-highlight-meta">— {{#if page}}page {{page}}, {{/if}}location {{locationStart}}–{{locationEnd}} · {{addedAt}}</span>
+<span class="kindle-library-highlight-meta">— {{#if page}}page {{page}}, {{/if}}{{locationStart}}–{{locationEnd}} · {{addedAt}}</span>
 
 {{/each}}`;
 
@@ -78,11 +87,21 @@ tags: [book, kindle]
 
 ## Questions to work with the book
 
-1. Why did I choose this book? What did I want to learn?
-2. What is the main idea of the book?
-3. What surprised me or changed my mind?
-4. What do I want to apply from what I read?
-5. Three key insights I want to remember.
+### 🚀 The Book in 3 Sentences
+Capture the core idea in three short sentences.
+> [your answer here]
+
+### ☘️ How the Book Changed Me
+What changed in my thinking or behavior.
+> [your answer here]
+
+### ✍️ Top 3 Quotes
+Quotes worth coming back to.
+> [your answer here]
+
+### 📒 Summary + Notes
+Useful notes and ideas to revisit later.
+> [your answer here]
 
 ---
 
@@ -90,8 +109,7 @@ tags: [book, kindle]
 
 {{#each highlights}}
 > {{text}}
-
-<span class="kindle-library-highlight-meta">— {{#if page}}page {{page}}, {{/if}}location {{locationStart}}–{{locationEnd}} · {{addedAt}}</span>
+<span class="kindle-library-highlight-meta">— {{#if page}}page {{page}}, {{/if}}{{locationStart}}–{{locationEnd}} · {{addedAt}}</span>
 
 {{/each}}`;
 

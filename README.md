@@ -1,90 +1,113 @@
-# Obsidian Sample Plugin
+# Kindle Library for Obsidian
 
-This is a sample plugin for Obsidian (https://obsidian.md).
+> Turn your Kindle highlights into a personal knowledge base — automatically.
 
-This project uses TypeScript to provide type checking and documentation.
-The repo depends on the latest plugin API (obsidian.d.ts) in TypeScript Definition format, which contains TSDoc comments describing what it does.
+[картинка: общий вид библиотеки с карточками книг и обложками]
 
-This sample plugin demonstrates some of the basic functionality the plugin API can do.
-- Adds a ribbon icon, which shows a Notice when clicked.
-- Adds a command "Open modal (simple)" which opens a Modal.
-- Adds a plugin setting tab to the settings page.
-- Registers a global click event and output 'click' to the console.
-- Registers a global interval which logs 'setInterval' to the console.
+---
 
-## First time developing plugins?
+## The problem
 
-Quick starting guide for new plugin devs:
+You read on Kindle. You highlight the best passages. Then... nothing happens. Those insights sit locked in `My Clippings.txt`, forgotten.
 
-- Check if [someone already developed a plugin for what you want](https://obsidian.md/plugins)! There might be an existing plugin similar enough that you can partner up with.
-- Make a copy of this repo as a template with the "Use this template" button (login to GitHub if you don't see it).
-- Clone your repo to a local development folder. For convenience, you can place this folder in your `.obsidian/plugins/your-plugin-name` folder.
-- Install NodeJS, then run `npm i` in the command line under your repo folder.
-- Run `npm run dev` to compile your plugin from `main.ts` to `main.js`.
-- Make changes to `main.ts` (or create new `.ts` files). Those changes should be automatically compiled into `main.js`.
-- Reload Obsidian to load the new version of your plugin.
-- Enable plugin in settings window.
-- For updates to the Obsidian API run `npm update` in the command line under your repo folder.
+**Kindle Library** brings everything into Obsidian — with covers, metadata, and reflection prompts — in minutes.
 
-## Releasing new releases
+---
 
-- Update your `manifest.json` with your new version number, such as `1.0.1`, and the minimum Obsidian version required for your latest release.
-- Update your `versions.json` file with `"new-plugin-version": "minimum-obsidian-version"` so older versions of Obsidian can download an older version of your plugin that's compatible.
-- Create new GitHub release using your new version number as the "Tag version". Use the exact version number, don't include a prefix `v`. See here for an example: https://github.com/obsidianmd/obsidian-sample-plugin/releases
-- Upload the files `manifest.json`, `main.js`, `styles.css` as binary attachments. Note: The manifest.json file must be in two places, first the root path of your repository and also in the release.
-- Publish the release.
+## What it does
 
-> You can simplify the version bump process by running `npm version patch`, `npm version minor` or `npm version major` after updating `minAppVersion` manually in `manifest.json`.
-> The command will bump version in `manifest.json` and `package.json`, and add the entry for the new version to `versions.json`
+**📥 Import in one click** — drop your `My Clippings.txt` and the plugin does the rest. It parses every highlight, deduplicates them, and creates a clean note per book.
 
-## Adding your plugin to the community plugin list
+**🔍 Auto-fetch metadata** — book covers, authors, publishers, descriptions and ISBNs pulled from Google Books automatically.
 
-- Check the [plugin guidelines](https://docs.obsidian.md/Plugins/Releasing/Plugin+guidelines).
-- Publish an initial version.
-- Make sure you have a `README.md` file in the root of your repo.
-- Make a pull request at https://github.com/obsidianmd/obsidian-releases to add your plugin.
+**📚 Visual library** — browse all your books as a cover grid. See how many you've read at a glance.
 
-## How to use
+[картинка: grid карточек с обложками книг, заголовком библиотеки и счётчиком "Всего: 24 · Прочитано: 21"]
 
-- Clone this repo.
-- Make sure your NodeJS is at least v16 (`node --version`).
-- `npm i` or `yarn` to install dependencies.
-- `npm run dev` to start compilation in watch mode.
+**🗂 Smart duplicate detection** — already imported a book? The plugin knows. It asks if you want to update or skip — never creates accidental duplicates.
 
-## Manually installing the plugin
+[картинка: модалка "Книга уже есть в библиотеке" с кнопками Обновить / Пропустить]
 
-- Copy over `main.js`, `styles.css`, `manifest.json` to your vault `VaultFolder/.obsidian/plugins/your-plugin-id/`.
+**💡 Built-in reflection prompts** — every note starts with 5 questions to help you actually process what you read, not just collect highlights.
 
-## Improve code quality with eslint
-- [ESLint](https://eslint.org/) is a tool that analyzes your code to quickly find problems. You can run ESLint against your plugin to find common bugs and ways to improve your code. 
-- This project already has eslint preconfigured, you can invoke a check by running`npm run lint`
-- Together with a custom eslint [plugin](https://github.com/obsidianmd/eslint-plugin) for Obsidan specific code guidelines.
-- A GitHub action is preconfigured to automatically lint every commit on all branches.
+[картинка: заметка книги с секцией вопросов и highlights с серым текстом location]
 
-## Funding URL
+**⚙️ Fully customizable** — note template is yours to edit. Change structure, fields, formatting — or reset to default any time.
 
-You can include funding URLs where people who use your plugin can financially support it.
+---
 
-The simple way is to set the `fundingUrl` field to your link in your `manifest.json` file:
+## Quick start
 
-```json
-{
-    "fundingUrl": "https://buymeacoffee.com"
-}
-```
+1. Connect your Kindle to your computer
+2. Copy `My Clippings.txt` from your Kindle
+3. Open Obsidian → click the book icon in the sidebar
+4. Hit **Import** and select the file
+5. Match each book to Google Books (or add as-is)
 
-If you have multiple URLs, you can also do:
+That's it. Your library is ready.
 
-```json
-{
-    "fundingUrl": {
-        "Buy Me a Coffee": "https://buymeacoffee.com",
-        "GitHub Sponsor": "https://github.com/sponsors",
-        "Patreon": "https://www.patreon.com/"
-    }
-}
-```
+---
 
-## API Documentation
+## Requirements
 
-See https://docs.obsidian.md
+- Obsidian 0.15+
+- Optional: Google Books API key (for higher rate limits)
+
+---
+
+---
+
+# Kindle Library для Obsidian
+
+> Превратите свои выделения из Kindle в личную базу знаний — автоматически.
+
+[картинка: общий вид библиотеки с карточками книг и обложками]
+
+---
+
+## Проблема
+
+Вы читаете на Kindle. Выделяете лучшие места. А потом... ничего. Идеи пылятся в файле `My Clippings.txt` и никогда не возвращаются.
+
+**Kindle Library** переносит всё в Obsidian — с обложками, метаданными и вопросами для осмысления — за несколько минут.
+
+---
+
+## Что умеет
+
+**📥 Импорт в один клик** — загрузите `My Clippings.txt`, остальное плагин сделает сам. Разберёт каждое выделение, уберёт дубликаты и создаст отдельную заметку на каждую книгу.
+
+**🔍 Метаданные автоматически** — обложки, авторы, издатели, описания и ISBN подтягиваются из Google Books без лишних действий.
+
+**📚 Визуальная библиотека** — все книги в виде сетки обложек. Счётчик прочитанного всегда перед глазами.
+
+[картинка: grid карточек с обложками книг, заголовком библиотеки и счётчиком "Всего: 24 · Прочитано: 21"]
+
+**🗂 Защита от дублей** — уже импортировали книгу? Плагин это запомнил. Спросит: обновить или пропустить — никаких случайных дублей.
+
+[картинка: модалка "Книга уже есть в библиотеке" с кнопками Обновить / Пропустить]
+
+**💡 Вопросы для работы с книгой** — каждая заметка начинается с 5 вопросов, которые помогают осмыслить прочитанное, а не просто копить цитаты.
+
+[картинка: заметка книги с секцией вопросов и highlights с серым текстом location]
+
+**⚙️ Гибкий шаблон** — шаблон заметки полностью настраивается. Меняйте структуру, поля, оформление — или сбросьте к стандарту одной кнопкой.
+
+---
+
+## Быстрый старт
+
+1. Подключите Kindle к компьютеру
+2. Скопируйте файл `My Clippings.txt` с устройства
+3. Откройте Obsidian → нажмите иконку книги на боковой панели
+4. Нажмите **Импорт** и выберите файл
+5. Подберите каждую книгу в Google Books (или добавьте как есть)
+
+Готово. Библиотека собрана.
+
+---
+
+## Требования
+
+- Obsidian 0.15+
+- Необязательно: API-ключ Google Books (для снятия лимитов запросов)

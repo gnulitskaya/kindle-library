@@ -2,7 +2,7 @@
 
 > Turn your Kindle highlights into a personal knowledge base — automatically.
 
-[картинка: общий вид библиотеки с карточками книг и обложками]
+![Kindle Library overview](images/cover1.jpg)
 
 ---
 

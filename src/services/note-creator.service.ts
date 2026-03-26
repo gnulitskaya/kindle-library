@@ -16,6 +16,9 @@ rating:
   - ★★★★☆
   - ★★★★★
 ---
+
+> [!warning]
+> Этот файл создан плагином **Kindle Library** для хранения вариантов полей. **Не изменяйте его вручную.**
 `;
 
 export class NoteCreatorService {
@@ -104,6 +107,13 @@ export class NoteCreatorService {
 	private async ensurePropertyOptionsFile(folderPath: string): Promise<void> {
 		const optionsPath = normalizePath(`${folderPath}/${PROPERTY_OPTIONS_FILENAME}`);
 		const existing = this.app.vault.getAbstractFileByPath(optionsPath);
+		if (existing instanceof TFile) {
+			const content = await this.app.vault.read(existing);
+			if (!content.startsWith('---\nstatus:')) {
+				await this.app.vault.modify(existing, PROPERTY_OPTIONS_CONTENT);
+			}
+			return;
+		}
 		if (!(existing instanceof TFile)) {
 			await this.app.vault.create(optionsPath, PROPERTY_OPTIONS_CONTENT);
 		}

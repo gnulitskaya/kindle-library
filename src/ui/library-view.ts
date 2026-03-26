@@ -14,12 +14,15 @@ interface BookCard {
 	publisher: string;
 	published: string;
 	status: string;
+	rating: string;
 }
 
 type StatusFilter = 'all' | 'read' | 'in-progress' | 'want-to-read';
+type RatingFilter = 'all' | '☆☆☆☆☆' | '★☆☆☆☆' | '★★☆☆☆' | '★★★☆☆' | '★★★★☆' | '★★★★★';
 
 export class LibraryView extends ItemView {
 	private statusFilter: StatusFilter = 'all';
+	private ratingFilter: RatingFilter = 'all';
 
 	constructor(
 		leaf: WorkspaceLeaf,
@@ -159,6 +162,28 @@ export class LibraryView extends ItemView {
 			void this.render();
 		});
 
+		wrap.createEl('span', { text: i18n.filterRatingLabel, cls: 'kindle-library-filter-label' });
+		const ratingSelect = wrap.createEl('select', { cls: 'kindle-library-filter-select' });
+		const ratingOptions: Array<{ value: RatingFilter; label: string }> = [
+			{ value: 'all', label: i18n.filterRatingAll },
+			{ value: '★★★★★', label: i18n.filterRating5 },
+			{ value: '★★★★☆', label: i18n.filterRating4 },
+			{ value: '★★★☆☆', label: i18n.filterRating3 },
+			{ value: '★★☆☆☆', label: i18n.filterRating2 },
+			{ value: '★☆☆☆☆', label: i18n.filterRating1 },
+			{ value: '☆☆☆☆☆', label: i18n.filterRating0 },
+		];
+
+		for (const option of ratingOptions) {
+			const el = ratingSelect.createEl('option', { text: option.label, value: option.value });
+			el.selected = option.value === this.ratingFilter;
+		}
+
+		ratingSelect.addEventListener('change', () => {
+			this.ratingFilter = (ratingSelect.value as RatingFilter) || 'all';
+			void this.render();
+		});
+
 		wrap.createEl('span', {
 			text: i18n.filterCount(shown, total),
 			cls: 'kindle-library-filter-count',
@@ -166,8 +191,11 @@ export class LibraryView extends ItemView {
 	}
 
 	private applyFilter(books: BookCard[]): BookCard[] {
-		if (this.statusFilter === 'all') return books;
-		return books.filter(b => (b.status || 'read') === this.statusFilter);
+		return books.filter(b => {
+			const statusOk = this.statusFilter === 'all' || (b.status || 'read') === this.statusFilter;
+			const ratingOk = this.ratingFilter === 'all' || (b.rating || '☆☆☆☆☆') === this.ratingFilter;
+			return statusOk && ratingOk;
+		});
 	}
 
 	private renderGrid(containerEl: HTMLElement, books: BookCard[]): void {
@@ -244,6 +272,7 @@ export class LibraryView extends ItemView {
 				publisher: String(fm['publisher'] ?? ''),
 				published: String(fm['published'] ?? ''),
 				status: String(fm['status'] ?? 'read'),
+				rating: String(fm['rating'] ?? '☆☆☆☆☆'),
 			});
 		}
 

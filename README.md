@@ -20,9 +20,15 @@ You read on Kindle. You highlight the best passages. Then... nothing happens. Th
 
 **🔍 Auto-fetch metadata** — book covers, authors, publishers, descriptions and ISBNs pulled from Google Books automatically.
 
+**➕ Manual add via Google Books** — no clippings yet? Use **Add manually** in the library page and create a book note in seconds.
+
 **📚 Visual library** — browse all your books as a cover grid. See how many you've read at a glance.
 
 [картинка: grid карточек с обложками книг, заголовком библиотеки и счётчиком "Всего: 24 · Прочитано: 21"]
+
+**🎯 Smart filters** — instantly filter your library by reading status (`read`, `in-progress`, `want-to-read`) and star rating (`☆☆☆☆☆` → `★★★★★`).
+
+[картинка: строка фильтров над библиотекой со статусом и рейтингом]
 
 **🗂 Smart duplicate detection** — already imported a book? The plugin knows. It asks if you want to update or skip — never creates accidental duplicates.
 
@@ -43,6 +49,8 @@ You read on Kindle. You highlight the best passages. Then... nothing happens. Th
 3. Open Obsidian → click the book icon in the sidebar
 4. Hit **Import** and select the file
 5. Match each book to Google Books (or add as-is)
+6. Or click **Add manually** to add books without `My Clippings.txt`
+7. Use status and rating filters to focus on what to read next
 
 That's it. Your library is ready.
 
@@ -79,9 +87,15 @@ That's it. Your library is ready.
 
 **🔍 Метаданные автоматически** — обложки, авторы, издатели, описания и ISBN подтягиваются из Google Books без лишних действий.
 
+**➕ Ручное добавление через Google Books** — если нет `My Clippings.txt`, нажмите **Добавить вручную** и создайте заметку книги за пару секунд.
+
 **📚 Визуальная библиотека** — все книги в виде сетки обложек. Счётчик прочитанного всегда перед глазами.
 
 [картинка: grid карточек с обложками книг, заголовком библиотеки и счётчиком "Всего: 24 · Прочитано: 21"]
+
+**🎯 Умные фильтры** — фильтруйте библиотеку по статусу чтения (`read`, `in-progress`, `want-to-read`) и рейтингу (`☆☆☆☆☆` → `★★★★★`).
+
+[картинка: строка фильтров над библиотекой со статусом и рейтингом]
 
 **🗂 Защита от дублей** — уже импортировали книгу? Плагин это запомнил. Спросит: обновить или пропустить — никаких случайных дублей.
 
@@ -102,6 +116,8 @@ That's it. Your library is ready.
 3. Откройте Obsidian → нажмите иконку книги на боковой панели
 4. Нажмите **Импорт** и выберите файл
 5. Подберите каждую книгу в Google Books (или добавьте как есть)
+6. Или нажмите **Добавить вручную**, чтобы добавить книгу без `My Clippings.txt`
+7. Используйте фильтры по статусу и рейтингу, чтобы быстро найти нужные книги
 
 Готово. Библиотека собрана.
 

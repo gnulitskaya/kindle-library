@@ -48,7 +48,7 @@ tags: [book, kindle]
 {{#each highlights}}
 > {{text}}
 
-— {{#if page}}page {{page}}, {{/if}}location {{locationStart}}–{{locationEnd}} · {{addedAt}}
+<span class="kindle-library-highlight-meta">— {{#if page}}page {{page}}, {{/if}}location {{locationStart}}–{{locationEnd}} · {{addedAt}}</span>
 
 {{/each}}`;
 

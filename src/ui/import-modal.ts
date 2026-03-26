@@ -27,6 +27,9 @@ export class ImportModal extends Modal {
 		contentEl.empty();
 		contentEl.addClass('kindle-library-import-modal');
 
+		this.modalEl.style.width = '600px';
+		this.modalEl.style.maxWidth = '95vw';
+
 		const i18n = t().importModal;
 
 		// Hero

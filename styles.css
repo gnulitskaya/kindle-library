@@ -1,8 +1,13 @@
 /* ── Import Modal ─────────────────────────────────────────── */
 
-.kindle-library-import-modal .modal-content {
-	width: 480px;
-	max-width: 95vw;
+.kindle-library-import-modal {
+	max-height: 90vh;
+	overflow-y: auto;
+}
+
+.markdown-rendered .kindle-library-highlight-meta {
+	font-size: 0.8em;
+	color: var(--text-muted);
 }
 
 /* Hero */
@@ -322,6 +327,12 @@
 	margin-bottom: 20px;
 }
 
+.kindle-library-view-title-block {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
 .kindle-library-view-header h2 {
 	margin: 0;
 	font-size: 1.2rem;
@@ -330,6 +341,20 @@
 .kindle-library-view-actions {
 	display: flex;
 	gap: 8px;
+}
+
+.kindle-library-view-stats {
+	font-size: 0.8rem;
+	color: var(--text-muted);
+	margin-top: 4px;
+}
+
+.kindle-library-stat {
+	color: var(--text-muted);
+}
+
+.kindle-library-stat-sep {
+	color: var(--text-faint);
 }
 
 .kindle-library-view-import-btn {

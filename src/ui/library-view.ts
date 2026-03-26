@@ -38,6 +38,9 @@ export class LibraryView extends ItemView {
 
 	async onOpen(): Promise<void> {
 		this.registerEvent(
+			this.app.metadataCache.on('resolved', () => this.render())
+		);
+		this.registerEvent(
 			this.app.metadataCache.on('changed', () => this.render())
 		);
 		this.registerEvent(
@@ -70,10 +73,19 @@ export class LibraryView extends ItemView {
 	private renderHeader(containerEl: HTMLElement, books: BookCard[]): void {
 		const i18n = t().libraryView;
 		const header = containerEl.createDiv('kindle-library-view-header');
-		header.createEl('h2', { text: i18n.heading });
+
+		const titleBlock = header.createDiv('kindle-library-view-title-block');
+		titleBlock.createEl('h2', { text: i18n.heading });
+		// TODO: Add stats
+		// if (books.length > 0) {
+		// 	const readCount = books.filter(b => !b.status || b.status === 'read').length;
+		// 	const stats = titleBlock.createDiv('kindle-library-view-stats');
+		// 	stats.createSpan({ text: i18n.statsTotal(books.length), cls: 'kindle-library-stat' });
+		// 	stats.createSpan({ text: ' · ', cls: 'kindle-library-stat-sep' });
+		// 	stats.createSpan({ text: i18n.statsRead(readCount), cls: 'kindle-library-stat' });
+		// }
 
 		const actions = header.createDiv('kindle-library-view-actions');
-
 		const importBtn = actions.createEl('button', {
 			text: i18n.importBtn,
 			cls: 'mod-cta kindle-library-view-import-btn',
@@ -81,14 +93,6 @@ export class LibraryView extends ItemView {
 		importBtn.addEventListener('click', () => {
 			new ImportModal(this.pluginApp, this.settings).open();
 		});
-
-		if (books.length > 0) {
-			const readCount = books.filter(b => !b.status || b.status === 'read').length;
-			const stats = header.createDiv('kindle-library-view-stats');
-			stats.createSpan({ text: i18n.statsTotal(books.length), cls: 'kindle-library-stat' });
-			stats.createSpan({ text: ' · ', cls: 'kindle-library-stat-sep' });
-			stats.createSpan({ text: i18n.statsRead(readCount), cls: 'kindle-library-stat' });
-		}
 	}
 
 	private renderEmpty(containerEl: HTMLElement): void {

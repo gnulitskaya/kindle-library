@@ -15,6 +15,9 @@ export class DuplicateBookModal extends Modal {
 		contentEl.empty();
 		contentEl.addClass('kindle-library-duplicate-modal');
 
+		this.modalEl.style.width = '600px';
+		this.modalEl.style.maxWidth = '95vw';
+
 		const i18n = t().duplicateModal;
 
 		contentEl.createEl('h2', { text: i18n.title });

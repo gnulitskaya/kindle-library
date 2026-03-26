@@ -6,6 +6,7 @@ import { NoteCreatorService } from '../services/note-creator.service';
 import { KindleLibrarySettings } from '../settings';
 import { GoogleBookVolume, ParsedBook } from '../types';
 import { BookConfirmModal } from './book-confirm-modal';
+import { DuplicateBookModal } from './duplicate-book-modal';
 
 
 export class ImportModal extends Modal {
@@ -99,6 +100,17 @@ export class ImportModal extends Modal {
 			if (!parsedBook) continue;
 
 			this.setStatus(statusEl, i18n.processing(i + 1, books.length, parsedBook.rawTitle));
+
+			const alreadyExists = this.noteCreator.noteExists(parsedBook.rawTitle, parsedBook.rawAuthor);
+			if (alreadyExists) {
+				const dupModal = new DuplicateBookModal(this.app, parsedBook.rawTitle);
+				dupModal.open();
+				const action = await dupModal.waitForResult();
+				if (action === 'skip') {
+					skipped++;
+					continue;
+				}
+			}
 
 			let bookVolume: GoogleBookVolume | null = null;
 

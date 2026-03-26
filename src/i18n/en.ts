@@ -38,12 +38,20 @@ export const en = {
 		addAsIs: 'Add as-is',
 		cancelImport: 'Cancel import',
 	},
+	duplicateModal: {
+		title: 'Book already in library',
+		message: (title: string) => `"${title}" is already in your library. Do you want to update it?`,
+		updateBtn: 'Update',
+		skipBtn: 'Skip',
+	},
 	libraryView: {
 		displayText: 'Kindle Library',
 		heading: 'Kindle Library',
 		importBtn: 'Import',
 		emptyText: 'No books yet. Import your Kindle clippings to get started.',
 		importClippingsBtn: 'Import clippings',
+		statsTotal: (n: number) => `Total: ${n}`,
+		statsRead: (n: number) => `Read: ${n}`,
 	},
 	settings: {
 		heading: 'Kindle Library',

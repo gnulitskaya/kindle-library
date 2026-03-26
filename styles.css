@@ -197,9 +197,7 @@
 
 
 
-.kindle-library-confirm-modal .modal-content {
-	width: 640px;
-	max-width: 95vw;
+.kindle-library-confirm-modal {
 	max-height: 80vh;
 	overflow-y: auto;
 }

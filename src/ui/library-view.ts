@@ -12,6 +12,7 @@ interface BookCard {
 	cover: string;
 	publisher: string;
 	published: string;
+	status: string;
 }
 
 export class LibraryView extends ItemView {
@@ -54,9 +55,9 @@ export class LibraryView extends ItemView {
 		contentEl.empty();
 		contentEl.addClass('kindle-library-view');
 
-		this.renderHeader(contentEl);
-
 		const books = this.loadBooks();
+
+		this.renderHeader(contentEl, books);
 
 		if (books.length === 0) {
 			this.renderEmpty(contentEl);
@@ -66,7 +67,7 @@ export class LibraryView extends ItemView {
 		this.renderGrid(contentEl, books);
 	}
 
-	private renderHeader(containerEl: HTMLElement): void {
+	private renderHeader(containerEl: HTMLElement, books: BookCard[]): void {
 		const i18n = t().libraryView;
 		const header = containerEl.createDiv('kindle-library-view-header');
 		header.createEl('h2', { text: i18n.heading });
@@ -80,6 +81,14 @@ export class LibraryView extends ItemView {
 		importBtn.addEventListener('click', () => {
 			new ImportModal(this.pluginApp, this.settings).open();
 		});
+
+		if (books.length > 0) {
+			const readCount = books.filter(b => !b.status || b.status === 'read').length;
+			const stats = header.createDiv('kindle-library-view-stats');
+			stats.createSpan({ text: i18n.statsTotal(books.length), cls: 'kindle-library-stat' });
+			stats.createSpan({ text: ' · ', cls: 'kindle-library-stat-sep' });
+			stats.createSpan({ text: i18n.statsRead(readCount), cls: 'kindle-library-stat' });
+		}
 	}
 
 	private renderEmpty(containerEl: HTMLElement): void {
@@ -154,6 +163,7 @@ export class LibraryView extends ItemView {
 				cover: String(fm['cover'] ?? ''),
 				publisher: String(fm['publisher'] ?? ''),
 				published: String(fm['published'] ?? ''),
+				status: String(fm['status'] ?? 'read'),
 			});
 		}
 

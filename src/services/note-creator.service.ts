@@ -8,6 +8,13 @@ export class NoteCreatorService {
 		private readonly settings: KindleLibrarySettings
 	) {}
 
+	noteExists(title: string, author: string): boolean {
+		const folderPath = normalizePath(this.settings.highlightsFolder);
+		const fileName = this.renderTemplate(this.settings.fileNameTemplate, { title, author });
+		const filePath = normalizePath(`${folderPath}/${sanitizeFileName(fileName)}.md`);
+		return this.app.vault.getAbstractFileByPath(filePath) instanceof TFile;
+	}
+
 	async createOrUpdateNote(bookNote: BookNote): Promise<TFile> {
 		const { book, parsedBook } = bookNote;
 

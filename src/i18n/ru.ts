@@ -53,12 +53,20 @@ export const ru: Translations = {
 		addAsIs: 'Добавить как есть',
 		cancelImport: 'Отменить импорт',
 	},
+	duplicateModal: {
+		title: 'Книга уже есть в библиотеке',
+		message: (title: string) => `«${title}» уже есть в вашей библиотеке. Хотите обновить её?`,
+		updateBtn: 'Обновить',
+		skipBtn: 'Пропустить',
+	},
 	libraryView: {
 		displayText: 'Библиотека Kindle',
 		heading: 'Библиотека Kindle',
 		importBtn: 'Импорт',
 		emptyText: 'Книг пока нет. Импортируйте выделения из Kindle, чтобы начать.',
 		importClippingsBtn: 'Импортировать',
+		statsTotal: (n: number) => `Всего: ${n}`,
+		statsRead: (n: number) => `Прочитано: ${n}`,
 	},
 	settings: {
 		heading: 'Библиотека Kindle',

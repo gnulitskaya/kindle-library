@@ -44,6 +44,9 @@ export class BookConfirmModal extends Modal {
 		contentEl.empty();
 		contentEl.addClass('kindle-library-confirm-modal');
 
+		this.modalEl.style.width = '660px';
+		this.modalEl.style.maxWidth = '95vw';
+
 		const i18n = t().confirmModal;
 
 		contentEl.createEl('h2', { text: i18n.title });

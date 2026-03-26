@@ -1,3 +1,5 @@
+export type BookStatus = 'read' | 'in-progress' | 'want-to-read';
+
 export interface Highlight {
 	text: string;
 	page: number | null;

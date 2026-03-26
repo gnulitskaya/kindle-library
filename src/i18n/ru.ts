@@ -51,6 +51,7 @@ export const ru: Translations = {
 		selectBestMatch: 'Выбрать (лучшее совпадение)',
 		select: 'Выбрать',
 		addAsIs: 'Добавить как есть',
+		skipBook: 'Пропустить книгу',
 		cancelImport: 'Отменить импорт',
 	},
 	duplicateModal: {

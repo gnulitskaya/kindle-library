@@ -36,6 +36,7 @@ export const en = {
 		selectBestMatch: 'Select (best match)',
 		select: 'Select',
 		addAsIs: 'Add as-is',
+		skipBook: 'Skip book',
 		cancelImport: 'Cancel import',
 	},
 	duplicateModal: {

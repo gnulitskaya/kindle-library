@@ -6,6 +6,7 @@ import { GoogleBookVolume, ParsedBook } from '../types';
 export type BookConfirmResult =
 	| { action: 'confirm'; book: GoogleBookVolume }
 	| { action: 'skip' }
+	| { action: 'skip-book' }
 	| { action: 'cancel' };
 
 /**
@@ -166,48 +167,33 @@ export class BookConfirmModal extends Modal {
 
 		const i18n = t().confirmModal;
 
-		if (bestMatch) {
-			new Setting(this.actionsEl)
-				.addButton(btn =>
-					btn.setButtonText(i18n.addAsIs).onClick(() => {
+		new Setting(this.actionsEl)
+			.addButton(btn =>
+				btn
+					.setButtonText(i18n.addAsIs)
+					.onClick(() => {
 						this.result = { action: 'skip' };
 						this.onResolve(this.result);
 						this.close();
 					})
-				)
-				.addButton(btn =>
-					btn
-						.setButtonText(i18n.cancelImport)
-						.setWarning()
-						.onClick(() => {
-							this.result = { action: 'cancel' };
-							this.onResolve(this.result);
-							this.close();
-						})
-				);
-		} else {
-			new Setting(this.actionsEl)
-				.addButton(btn =>
-					btn
-						.setButtonText(i18n.addAsIs)
-						.setCta()
-						.onClick(() => {
-							this.result = { action: 'skip' };
-							this.onResolve(this.result);
-							this.close();
-						})
-				)
-				.addButton(btn =>
-					btn
-						.setButtonText(i18n.cancelImport)
-						.setWarning()
-						.onClick(() => {
-							this.result = { action: 'cancel' };
-							this.onResolve(this.result);
-							this.close();
-						})
-				);
-		}
+			)
+			.addButton(btn =>
+				btn.setButtonText(i18n.skipBook).onClick(() => {
+					this.result = { action: 'skip-book' };
+					this.onResolve(this.result);
+					this.close();
+				})
+			)
+			.addButton(btn =>
+				btn
+					.setButtonText(i18n.cancelImport)
+					.setWarning()
+					.onClick(() => {
+						this.result = { action: 'cancel' };
+						this.onResolve(this.result);
+						this.close();
+					})
+			);
 	}
 
 	onClose(): void {

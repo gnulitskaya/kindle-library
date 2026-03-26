@@ -1,6 +1,7 @@
 import { App, Modal, Notice } from 'obsidian';
 import { t } from '../i18n';
 import { parseClippings } from '../parser/clippings-parser';
+import { BookRegistryService } from '../services/book-registry.service';
 import { GoogleBooksService } from '../services/google-books.service';
 import { NoteCreatorService } from '../services/note-creator.service';
 import { KindleLibrarySettings } from '../settings';
@@ -12,11 +13,13 @@ import { DuplicateBookModal } from './duplicate-book-modal';
 export class ImportModal extends Modal {
 	private googleBooks: GoogleBooksService;
 	private noteCreator: NoteCreatorService;
+	private registry: BookRegistryService;
 
 	constructor(app: App, private readonly settings: KindleLibrarySettings) {
 		super(app);
 		this.googleBooks = new GoogleBooksService(settings.googleApiKey || undefined);
 		this.noteCreator = new NoteCreatorService(app, settings);
+		this.registry = new BookRegistryService(app, settings);
 	}
 
 	onOpen(): void {
@@ -101,7 +104,7 @@ export class ImportModal extends Modal {
 
 			this.setStatus(statusEl, i18n.processing(i + 1, books.length, parsedBook.rawTitle));
 
-			const alreadyExists = this.noteCreator.noteExists(parsedBook.rawTitle, parsedBook.rawAuthor);
+			const alreadyExists = await this.registry.isRegistered(parsedBook);
 			if (alreadyExists) {
 				const dupModal = new DuplicateBookModal(this.app, parsedBook.rawTitle);
 				dupModal.open();
@@ -124,6 +127,11 @@ export class ImportModal extends Modal {
 					break;
 				}
 
+				if (result.action === 'skip-book') {
+					skipped++;
+					continue;
+				}
+
 				if (result.action === 'confirm') {
 					bookVolume = result.book;
 				}
@@ -136,6 +144,7 @@ export class ImportModal extends Modal {
 					book: bookVolume ?? parsedBookToVolume(parsedBook),
 					parsedBook,
 				});
+				await this.registry.register(parsedBook, bookVolume);
 				created++;
 			} catch (err) {
 				console.error(`Failed to create note for "${parsedBook.rawTitle}":`, err);

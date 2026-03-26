@@ -16,7 +16,11 @@ interface BookCard {
 	status: string;
 }
 
+type StatusFilter = 'all' | 'read' | 'in-progress' | 'want-to-read';
+
 export class LibraryView extends ItemView {
+	private statusFilter: StatusFilter = 'all';
+
 	constructor(
 		leaf: WorkspaceLeaf,
 		private readonly settings: KindleLibrarySettings,
@@ -34,7 +38,7 @@ export class LibraryView extends ItemView {
 	}
 
 	getIcon(): string {
-		return 'book-open';
+		return 'kindle-library';
 	}
 
 	async onOpen(): Promise<void> {
@@ -60,15 +64,22 @@ export class LibraryView extends ItemView {
 		contentEl.addClass('kindle-library-view');
 
 		const books = this.loadBooks();
+		const filteredBooks = this.applyFilter(books);
 
 		this.renderHeader(contentEl, books);
+		this.renderFilterBar(contentEl, books.length, filteredBooks.length);
 
 		if (books.length === 0) {
 			this.renderEmpty(contentEl);
 			return;
 		}
 
-		this.renderGrid(contentEl, books);
+		if (filteredBooks.length === 0) {
+			this.renderNoMatches(contentEl);
+			return;
+		}
+
+		this.renderGrid(contentEl, filteredBooks);
 	}
 
 	private renderHeader(containerEl: HTMLElement, books: BookCard[]): void {
@@ -116,6 +127,47 @@ export class LibraryView extends ItemView {
 		btn.addEventListener('click', () => {
 			new ImportModal(this.pluginApp, this.settings).open();
 		});
+	}
+
+	private renderNoMatches(containerEl: HTMLElement): void {
+		containerEl.createEl('p', {
+			text: t().libraryView.noFilteredBooks,
+			cls: 'kindle-library-filter-empty',
+		});
+	}
+
+	private renderFilterBar(containerEl: HTMLElement, total: number, shown: number): void {
+		const i18n = t().libraryView;
+		const wrap = containerEl.createDiv('kindle-library-filter-row');
+		wrap.createEl('span', { text: i18n.filterLabel, cls: 'kindle-library-filter-label' });
+
+		const select = wrap.createEl('select', { cls: 'kindle-library-filter-select' });
+		const options: Array<{ value: StatusFilter; label: string }> = [
+			{ value: 'all', label: i18n.filterAll },
+			{ value: 'read', label: i18n.filterRead },
+			{ value: 'in-progress', label: i18n.filterInProgress },
+			{ value: 'want-to-read', label: i18n.filterWantToRead },
+		];
+
+		for (const option of options) {
+			const el = select.createEl('option', { text: option.label, value: option.value });
+			el.selected = option.value === this.statusFilter;
+		}
+
+		select.addEventListener('change', () => {
+			this.statusFilter = (select.value as StatusFilter) || 'all';
+			void this.render();
+		});
+
+		wrap.createEl('span', {
+			text: i18n.filterCount(shown, total),
+			cls: 'kindle-library-filter-count',
+		});
+	}
+
+	private applyFilter(books: BookCard[]): BookCard[] {
+		if (this.statusFilter === 'all') return books;
+		return books.filter(b => (b.status || 'read') === this.statusFilter);
 	}
 
 	private renderGrid(containerEl: HTMLElement, books: BookCard[]): void {
@@ -177,6 +229,9 @@ export class LibraryView extends ItemView {
 		const books: BookCard[] = [];
 
 		for (const file of files) {
+			// Skip internal service files used by the plugin.
+			if (file.basename.startsWith('_')) continue;
+
 			const cache = this.app.metadataCache.getFileCache(file);
 			const fm = cache?.frontmatter;
 			if (!fm) continue;

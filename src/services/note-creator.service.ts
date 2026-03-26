@@ -2,6 +2,22 @@ import { App, TFile, normalizePath } from 'obsidian';
 import { BookNote, Highlight } from '../types';
 import { KindleLibrarySettings } from '../settings';
 
+const PROPERTY_OPTIONS_FILENAME = '_kindle-library-options.md';
+const PROPERTY_OPTIONS_CONTENT = `---
+status:
+  - read
+  - in-progress
+  - want-to-read
+rating:
+  - ☆☆☆☆☆
+  - ★☆☆☆☆
+  - ★★☆☆☆
+  - ★★★☆☆
+  - ★★★★☆
+  - ★★★★★
+---
+`;
+
 export class NoteCreatorService {
 	constructor(
 		private readonly app: App,
@@ -13,6 +29,7 @@ export class NoteCreatorService {
 
 		const folderPath = normalizePath(this.settings.highlightsFolder);
 		await this.ensureFolder(folderPath);
+		await this.ensurePropertyOptionsFile(folderPath);
 
 		const fileName = this.renderTemplate(this.settings.fileNameTemplate, {
 			title: book.title || parsedBook.rawTitle,
@@ -81,6 +98,14 @@ export class NoteCreatorService {
 		const exists = this.app.vault.getAbstractFileByPath(folderPath);
 		if (!exists) {
 			await this.app.vault.createFolder(folderPath);
+		}
+	}
+
+	private async ensurePropertyOptionsFile(folderPath: string): Promise<void> {
+		const optionsPath = normalizePath(`${folderPath}/${PROPERTY_OPTIONS_FILENAME}`);
+		const existing = this.app.vault.getAbstractFileByPath(optionsPath);
+		if (!(existing instanceof TFile)) {
+			await this.app.vault.create(optionsPath, PROPERTY_OPTIONS_CONTENT);
 		}
 	}
 }

@@ -17,6 +17,7 @@ publisher: "{{publisher}}"
 published: "{{publishedDate}}"
 isbn: "{{isbn}}"
 status: "read"
+rating: "☆☆☆☆☆"
 tags: [book, kindle]
 ---
 
@@ -69,6 +70,7 @@ publisher: "{{publisher}}"
 published: "{{publishedDate}}"
 isbn: "{{isbn}}"
 status: "read"
+rating: "☆☆☆☆☆"
 tags: [book, kindle]
 ---
 

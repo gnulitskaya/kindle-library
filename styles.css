@@ -371,6 +371,36 @@
 	cursor: pointer;
 }
 
+.kindle-library-filter-row {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin-bottom: 14px;
+}
+
+.kindle-library-filter-label {
+	font-size: 0.85rem;
+	color: var(--text-muted);
+}
+
+.kindle-library-filter-select {
+	min-width: 180px;
+	padding: 4px 8px;
+	font-size: 0.85rem;
+}
+
+.kindle-library-filter-count {
+	margin-left: auto;
+	font-size: 0.8rem;
+	color: var(--text-faint);
+}
+
+.kindle-library-filter-empty {
+	margin: 8px 0 0;
+	font-size: 0.9rem;
+	color: var(--text-muted);
+}
+
 /* Grid */
 .kindle-library-grid {
 	display: grid;

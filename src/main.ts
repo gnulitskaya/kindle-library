@@ -1,4 +1,4 @@
-import { Plugin, WorkspaceLeaf } from 'obsidian';
+import { Plugin, WorkspaceLeaf, addIcon } from 'obsidian';
 import { t } from './i18n';
 import { DEFAULT_SETTINGS, KindleLibrarySettings, KindleLibrarySettingTab } from './settings';
 import { ImportModal } from './ui/import-modal';
@@ -8,6 +8,7 @@ export default class KindleLibraryPlugin extends Plugin {
 	settings: KindleLibrarySettings;
 
 	async onload() {
+		addIcon('kindle-library', KINDLE_ICON_SVG);
 		await this.loadSettings();
 
 		this.registerView(
@@ -29,7 +30,7 @@ export default class KindleLibraryPlugin extends Plugin {
 			},
 		});
 
-		this.addRibbonIcon('book-open', t().commands.ribbonTooltip, () => this.openLibraryView());
+		this.addRibbonIcon('kindle-library', t().commands.ribbonTooltip, () => this.openLibraryView());
 
 		this.addSettingTab(new KindleLibrarySettingTab(this.app, this));
 	}
@@ -61,3 +62,15 @@ export default class KindleLibraryPlugin extends Plugin {
 		await this.saveData(this.settings);
 	}
 }
+
+// SVG content for addIcon (wrapped by Obsidian in a 100×100 viewBox)
+const KINDLE_ICON_SVG = `
+<rect x="18" y="6" width="64" height="88" rx="7" fill="#EC4899"/>
+<rect x="18" y="6" width="14" height="88" rx="7" fill="#BE185D"/>
+<rect x="32" y="6" width="3" height="88" fill="#BE185D"/>
+<rect x="36" y="18" width="36" height="52" rx="3" fill="#FFF1F7"/>
+<path d="M41 32 L66 32" stroke="#BE185D" stroke-width="4" stroke-linecap="round"/>
+<path d="M41 42 L66 42" stroke="#BE185D" stroke-width="4" stroke-linecap="round"/>
+<path d="M41 52 L58 52" stroke="#BE185D" stroke-width="4" stroke-linecap="round"/>
+<circle cx="50" cy="82" r="5" fill="#FFF1F7" opacity="0.55"/>
+`;

@@ -32,8 +32,6 @@ You read on Kindle. You highlight the best passages. Then... nothing happens. Th
 
 **🗂 Smart duplicate detection** — already imported a book? The plugin knows. It asks if you want to update or skip — never creates accidental duplicates.
 
-[картинка: модалка "Книга уже есть в библиотеке" с кнопками Обновить / Пропустить]
-
 **💡 Built-in reflection prompts** — every note starts with 5 questions to help you actually process what you read, not just collect highlights.
 
 ![Kindle Library overview](images/cover3.jpg)
@@ -63,7 +61,6 @@ That's it. Your library is ready.
 
 ---
 
----
 
 # Kindle Library для Obsidian
 
@@ -98,8 +95,6 @@ That's it. Your library is ready.
 ![Kindle Library overview](images/cover4.jpg)
 
 **🗂 Защита от дублей** — уже импортировали книгу? Плагин это запомнил. Спросит: обновить или пропустить — никаких случайных дублей.
-
-[картинка: модалка "Книга уже есть в библиотеке" с кнопками Обновить / Пропустить]
 
 **💡 Вопросы для работы с книгой** — каждая заметка начинается с 5 вопросов, которые помогают осмыслить прочитанное, а не просто копить цитаты.
 

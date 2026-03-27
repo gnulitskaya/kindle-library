@@ -36,7 +36,7 @@ export default class KindleLibraryPlugin extends Plugin {
 	}
 
 	onunload() {
-		this.app.workspace.detachLeavesOfType(VIEW_TYPE_LIBRARY);
+		// Obsidian automatically cleans up registered views on unload.
 	}
 
 	private async openLibraryView(): Promise<void> {

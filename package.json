@@ -1,6 +1,6 @@
 {
 	"name": "kindle-library",
-	"version": "2.0.0",
+	"version": "3.0.0",
 	"description": "This is a plugin for Obsidian (https://obsidian.md) to import Kindle clippings",
 	"main": "main.js",
 	"type": "module",

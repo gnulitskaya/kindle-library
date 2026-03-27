@@ -141,8 +141,6 @@ export class KindleLibrarySettingTab extends PluginSettingTab {
 
 		const i18n = t().settings;
 
-		containerEl.createEl('h2', { text: i18n.heading });
-
 		new Setting(containerEl)
 			.setName(i18n.highlightsFolder.name)
 			.setDesc(i18n.highlightsFolder.desc)

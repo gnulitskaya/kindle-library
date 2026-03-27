@@ -121,7 +121,7 @@ export class LibraryView extends ItemView {
 	private renderEmpty(containerEl: HTMLElement): void {
 		const i18n = t().libraryView;
 		const empty = containerEl.createDiv('kindle-library-view-empty');
-		empty.createDiv('kindle-library-view-empty-icon').innerHTML = EMPTY_SVG;
+		appendSvg(empty.createDiv('kindle-library-view-empty-icon'), EMPTY_SVG);
 		empty.createEl('p', { text: i18n.emptyText });
 		const btn = empty.createEl('button', {
 			text: i18n.importClippingsBtn,
@@ -225,10 +225,10 @@ export class LibraryView extends ItemView {
 			img.loading = 'lazy';
 			img.onerror = () => {
 				img.remove();
-				coverWrap.innerHTML = BOOK_PLACEHOLDER_SVG;
+				appendSvg(coverWrap, BOOK_PLACEHOLDER_SVG);
 			};
 		} else {
-			coverWrap.innerHTML = BOOK_PLACEHOLDER_SVG;
+			appendSvg(coverWrap, BOOK_PLACEHOLDER_SVG);
 		}
 
 		// Info
@@ -278,6 +278,13 @@ export class LibraryView extends ItemView {
 
 		return books.sort((a, b) => a.title.localeCompare(b.title));
 	}
+}
+
+function appendSvg(container: HTMLElement, svgString: string): void {
+	const parser = new DOMParser();
+	const doc = parser.parseFromString(svgString, 'image/svg+xml');
+	const svgEl = doc.documentElement;
+	if (svgEl) container.appendChild(svgEl);
 }
 
 const BOOK_PLACEHOLDER_SVG = `<svg class="kindle-library-card-placeholder-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 80" fill="none" aria-hidden="true">

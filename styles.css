@@ -302,6 +302,69 @@
 	padding-top: 8px;
 }
 
+/* ── Duplicate Book Modal ─────────────────────────────────── */
+
+.kindle-library-duplicate-modal {
+	max-height: 80vh;
+	overflow-y: auto;
+}
+
+.kindle-library-duplicate-modal h2 {
+	margin: 0 0 12px;
+	font-size: 1.45rem;
+	line-height: 1.2;
+}
+
+.kindle-library-duplicate-msg {
+	margin: 0;
+	padding: 12px 14px;
+	border-radius: var(--radius-m);
+	background: var(--background-secondary);
+	color: var(--text-normal);
+	font-size: 0.98rem;
+	line-height: 1.45;
+}
+
+.kindle-library-duplicate-footer {
+	display: flex;
+	gap: 10px;
+	justify-content: flex-end;
+	margin-top: 16px;
+}
+
+.kindle-library-duplicate-btn {
+	min-width: 108px;
+	padding: 8px 14px;
+	border-radius: var(--radius-m);
+	font-size: 0.9rem;
+	font-weight: 600;
+	cursor: pointer;
+	transition: transform 0.08s ease, opacity 0.15s ease;
+}
+
+.kindle-library-duplicate-btn:hover {
+	opacity: 0.95;
+}
+
+.kindle-library-duplicate-btn:active {
+	transform: translateY(1px);
+}
+
+.kindle-library-duplicate-btn-skip {
+	background: var(--background-modifier-hover);
+	color: var(--text-normal);
+}
+
+@media (max-width: 480px) {
+	.kindle-library-duplicate-footer {
+		flex-direction: column;
+	}
+
+	.kindle-library-duplicate-btn {
+		width: 100%;
+	}
+}
+
 /* ── Settings ─────────────────────────────────────────────── */
 
 .kindle-library-template-textarea {

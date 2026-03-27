@@ -27,11 +27,14 @@ export class DuplicateBookModal extends Modal {
 
 		const updateBtn = footer.createEl('button', {
 			text: i18n.updateBtn,
-			cls: 'mod-cta',
+			cls: 'mod-cta kindle-library-duplicate-btn kindle-library-duplicate-btn-update',
 		});
 		updateBtn.addEventListener('click', () => this.complete('update'));
 
-		const skipBtn = footer.createEl('button', { text: i18n.skipBtn });
+		const skipBtn = footer.createEl('button', {
+			text: i18n.skipBtn,
+			cls: 'kindle-library-duplicate-btn kindle-library-duplicate-btn-skip',
+		});
 		skipBtn.addEventListener('click', () => this.complete('skip'));
 	}
 

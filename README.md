@@ -24,11 +24,11 @@ You read on Kindle. You highlight the best passages. Then... nothing happens. Th
 
 **📚 Visual library** — browse all your books as a cover grid. See how many you've read at a glance.
 
-[картинка: grid карточек с обложками книг, заголовком библиотеки и счётчиком "Всего: 24 · Прочитано: 21"]
+![Kindle Library overview](images/cover2.jpg)
 
 **🎯 Smart filters** — instantly filter your library by reading status (`read`, `in-progress`, `want-to-read`) and star rating (`☆☆☆☆☆` → `★★★★★`).
 
-[картинка: строка фильтров над библиотекой со статусом и рейтингом]
+![Kindle Library overview](images/cover4.jpg)
 
 **🗂 Smart duplicate detection** — already imported a book? The plugin knows. It asks if you want to update or skip — never creates accidental duplicates.
 
@@ -36,7 +36,7 @@ You read on Kindle. You highlight the best passages. Then... nothing happens. Th
 
 **💡 Built-in reflection prompts** — every note starts with 5 questions to help you actually process what you read, not just collect highlights.
 
-[картинка: заметка книги с секцией вопросов и highlights с серым текстом location]
+![Kindle Library overview](images/cover3.jpg)
 
 **⚙️ Fully customizable** — note template is yours to edit. Change structure, fields, formatting — or reset to default any time.
 
@@ -69,7 +69,7 @@ That's it. Your library is ready.
 
 > Превратите свои выделения из Kindle в личную базу знаний — автоматически.
 
-[картинка: общий вид библиотеки с карточками книг и обложками]
+![Kindle Library overview](images/cover1.jpg)
 
 ---
 
@@ -91,11 +91,11 @@ That's it. Your library is ready.
 
 **📚 Визуальная библиотека** — все книги в виде сетки обложек. Счётчик прочитанного всегда перед глазами.
 
-[картинка: grid карточек с обложками книг, заголовком библиотеки и счётчиком "Всего: 24 · Прочитано: 21"]
+![Kindle Library overview](images/cover2.jpg)
 
 **🎯 Умные фильтры** — фильтруйте библиотеку по статусу чтения (`read`, `in-progress`, `want-to-read`) и рейтингу (`☆☆☆☆☆` → `★★★★★`).
 
-[картинка: строка фильтров над библиотекой со статусом и рейтингом]
+![Kindle Library overview](images/cover4.jpg)
 
 **🗂 Защита от дублей** — уже импортировали книгу? Плагин это запомнил. Спросит: обновить или пропустить — никаких случайных дублей.
 
@@ -103,7 +103,7 @@ That's it. Your library is ready.
 
 **💡 Вопросы для работы с книгой** — каждая заметка начинается с 5 вопросов, которые помогают осмыслить прочитанное, а не просто копить цитаты.
 
-[картинка: заметка книги с секцией вопросов и highlights с серым текстом location]
+![Kindle Library overview](images/cover3.jpg)
 
 **⚙️ Гибкий шаблон** — шаблон заметки полностью настраивается. Меняйте структуру, поля, оформление — или сбросьте к стандарту одной кнопкой.
 
